@@ -7,8 +7,7 @@ spark = SparkSession \
     .getOrCreate()
 
 
-
-s = spark.readStream.option("delimiter", ",").schema("id INT, val1 INT, val2 INT").csv('file:/root/dump/source1/')
+s = spark.readStream.option("sep", ",").schema("id INT, val1 INT, val2 INT").csv('file:/root/dump/source1/', header=True)
 s.show()
 s.writeStream.format("console").option("truncate","false").start()
 
