@@ -9,7 +9,7 @@ do
 		idf=$(shuf -i 10000-99999 -n 1)
 		for _ in `seq 1 10`
 		do
-			echo $idf, $(shuf -i 0-100 -n 1), $(shuf -i 0-500 -n 1) >> dump/source1/$filename.csv
+			echo $idf,$(shuf -i 0-100 -n 1),$(shuf -i 0-500 -n 1) >> dump/source1/$filename.csv
 		done
 	done
 
@@ -22,7 +22,7 @@ do
 		idf=$(shuf -i 10000-99999 -n 1)
 		for _ in `seq 1 10`
 		do
-			echo $idf, $(shuf -i 0-100 -n 1), $(shuf -i 0-500 -n 1) >> dump/source2/$filename.csv
+			echo $idf,$(shuf -i 0-100 -n 1),$(shuf -i 0-500 -n 1) >> dump/source2/$filename.csv
 		done
 	done
 
