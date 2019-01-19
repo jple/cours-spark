@@ -1,5 +1,6 @@
 # cours-spark
 ## Contenu dossier script
+<pre>
 script/
 |-- gen-rand
 |   |-- gen-rand.sh
@@ -7,6 +8,7 @@ script/
 `-- gen-rand-csv
     |-- gen-rand-csv.sh
     `-- stream-csv.py
+</pre>
 
 ## Utilisation des scripts
 ### gen-rand
