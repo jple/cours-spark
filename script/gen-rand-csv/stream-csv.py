@@ -5,18 +5,20 @@ import pyspark.sql.functions as F
 
 spark = SparkSession \
     .builder \
-    .appName("StructuredNetworkWordCount") \
+    .appName("bob_lenon") \
     .getOrCreate()
+
+path='file:/root/cours-spark/dump/gen-rand-csv/'
 
 
 # afficher les dataframe du stream
-s1 = spark.readStream.option("sep", ",").schema("id INT, val1 INT, val2 INT").csv('file:/root/dump/source1/', header=True)
+s1 = spark.readStream.option("sep", ",").schema("id INT, date DATE, val1 INT, val2 INT").csv(path+'source1/', header=True)
 s1.writeStream.format("console").option("truncate","false").start()
 
 
 # combiner deux streams
-s1 = spark.readStream.option("sep", ",").schema("id INT, val1 INT, val2 INT").csv('file:/root/dump/source1/', header=True)
-s2 = spark.readStream.option("sep", ",").schema("id INT, val1 INT, val2 INT").csv('file:/root/dump/source2/', header=True)
+s1 = spark.readStream.option("sep", ",").schema("id INT, date DATE, val1 INT, val2 INT").csv('file:/root/dump/gen-rand-csv/source1/', header=True)
+s2 = spark.readStream.option("sep", ",").schema("id INT, date DATE, val1 INT, val2 INT").csv('file:/root/dump/gen-rand-csv/source2/', header=True)
 
 s1_wm = s1.withWatermark("s1_time", "3 seconds")
 s2_wm = s2.withWatermark("s2_time", "3 seconds")
@@ -34,5 +36,4 @@ mean_val1_s1.writeStream.format("console").option("truncate","false").start()
 mean_val1.writeStream.format("console").option("truncate","false").start()
 
 
-df = spark.read.option("delimiter", ",").option("header","true").csv('file:/root/dump/source1/', inferSchema=True)
-df.select(F.avg('val1')).withColumn('source', F.lit(1)).show()
+df = spark.read.option("delimiter", ",").option("header","true").csv('file:/root/dump/gen-rand-csv/source1/', inferSchema=True)
